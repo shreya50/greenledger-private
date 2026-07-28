@@ -1,0 +1,21 @@
+[
+  {
+    "id": "claim_katingan_existing",
+    "canonicalKey": "dc2b9456a2da431fc8a8db7a2ff7a5a81a67925d293d464dfc50e4bc1dda90eb",
+    "status": "verified",
+    "registry": "Verra VCS",
+    "projectId": "1477",
+    "projectName": "Katingan Peatland Restoration and Conservation Project",
+    "country": "Indonesia",
+    "methodology": "VM0007",
+    "vintage": "2020",
+    "serialStart": "GL-DEMO-KMP-2017-001",
+    "serialEnd": "GL-DEMO-KMP-2017-001",
+    "estimatedTco2e": 7400000,
+    "sourceUrl": "https://registry.verra.org/app/projectDetail/VCS/1477",
+    "sourceType": "public-registry-record",
+    "fixtureNote": "The project metadata is public registry data. The serial fixture is synthetic and exists only to exercise duplicate-prevention logic.",
+    "verifiedAt": "2026-07-28T09:00:00.000Z",
+    "verifiedBy": "demo-verifier"
+  }
+]

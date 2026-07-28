@@ -1,0 +1,61 @@
+{
+  "snapshot": {
+    "label": "GreenLedger curated public-metadata snapshot",
+    "capturedAt": "2026-07-28T00:00:00.000Z",
+    "purpose": "Reliable demo fallback while a CAD Trust API connection is not configured.",
+    "limitations": "Registry project metadata below is sourced from a public registry page. Serial-range values are clearly labelled synthetic test fixtures because public project pages do not establish a unit-level ownership or retirement record."
+  },
+  "projects": [
+    {
+      "demoKey": "katingan-duplicate",
+      "sourceType": "public-registry-record",
+      "registry": "Verra VCS",
+      "projectId": "1477",
+      "projectName": "Katingan Peatland Restoration and Conservation Project",
+      "country": "Indonesia",
+      "methodology": "VM0007",
+      "vintage": "2020",
+      "serialStart": "GL-DEMO-KMP-2017-001",
+      "serialEnd": "GL-DEMO-KMP-2017-001",
+      "estimatedTco2e": 7400000,
+      "sourceUrl": "https://registry.verra.org/app/projectDetail/VCS/1477",
+      "sourceTitle": "Verra Registry — Project 1477",
+      "citation": "Project Summary: Project ID 1477; Katingan Peatland Restoration and Conservation Project.",
+      "fixtureNote": "Synthetic serial fixture used solely to demonstrate exact duplicate prevention against the same real registry project metadata."
+    },
+    {
+      "demoKey": "katingan-review",
+      "sourceType": "public-registry-record",
+      "registry": "Verra VCS",
+      "projectId": "1477",
+      "projectName": "Katingan Peatland Restoration and Conservation Project",
+      "country": "Indonesia",
+      "methodology": "VM0007",
+      "vintage": "2020",
+      "serialStart": "GL-DEMO-KMP-2020-042",
+      "serialEnd": "GL-DEMO-KMP-2020-047",
+      "estimatedTco2e": 6000,
+      "sourceUrl": "https://registry.verra.org/app/projectDetail/VCS/1477",
+      "sourceTitle": "Verra Registry — Project 1477",
+      "citation": "Project Summary: Project ID 1477; Katingan Peatland Restoration and Conservation Project.",
+      "fixtureNote": "Synthetic serial fixture used solely to demonstrate manual review where real project metadata strongly overlaps but the canonical key differs."
+    },
+    {
+      "demoKey": "eligible-fixture",
+      "sourceType": "labelled-demo-fixture",
+      "registry": "GreenLedger demonstration registry",
+      "projectId": "GL-SOLAR-001",
+      "projectName": "Karnataka Community Solar Demonstration",
+      "country": "India",
+      "methodology": "Demo renewable-energy methodology",
+      "vintage": "2023",
+      "serialStart": "GL-DEMO-SOLAR-001",
+      "serialEnd": "GL-DEMO-SOLAR-010",
+      "estimatedTco2e": 1120,
+      "sourceUrl": "https://example.com/greenledger-labelled-demo-fixture",
+      "sourceTitle": "GreenLedger labelled demo fixture",
+      "citation": "Labelled synthetic project used to exercise the eligible → verified → retired lifecycle without representing a registry-issued credit.",
+      "fixtureNote": "This scenario is intentionally synthetic; it must never be presented as registry-issued project or unit data."
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "greenledger-prototype",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Evidence-first carbon claim integrity prototype",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test tests/*.test.js",
+    "db:migrate": "node scripts/migrate.js",
+    "db:seed": "node scripts/seed.js",
+    "db:setup": "npm run db:migrate && npm run db:seed"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "pdf-parse": "^1.1.1",
+    "pg": "^8.16.3"
+  }
+}

@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GreenLedger · Design System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --ink-950: #10211d;
+        --ink-800: #29423b;
+        --ink-650: #5a706a;
+        --ink-500: #79908a;
+        --ink-300: #b6c7c1;
+        --ink-150: #dce6e1;
+        --ink-100: #e8eeeb;
+        --canvas: #f6f7f2;
+        --surface: #ffffff;
+        --surface-soft: #edf2ee;
+        --green-900: #144d3a;
+        --green-700: #1d7554;
+        --green-600: #289166;
+        --green-200: #bce9ce;
+        --green-100: #e0f6e7;
+        --teal-700: #147b7a;
+        --teal-100: #d9f1ef;
+        --gold-700: #9d5c08;
+        --gold-100: #fff0c8;
+        --coral-700: #ae3b35;
+        --coral-100: #fde6df;
+        --violet-700: #6253a0;
+        --violet-100: #eae7f8;
+        --radius-xs: 6px;
+        --radius-sm: 10px;
+        --radius-md: 16px;
+        --radius-lg: 24px;
+        --radius-pill: 999px;
+        --shadow-xs: 0 1px 2px rgba(16, 33, 29, .06);
+        --shadow-sm: 0 5px 14px rgba(16, 33, 29, .07);
+        --shadow-lg: 0 20px 60px rgba(16, 33, 29, .13);
+        --sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+        --serif: "Fraunces", Georgia, serif;
+        --mono: "DM Mono", ui-monospace, monospace;
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body { margin: 0; color: var(--ink-950); background: var(--canvas); font-family: var(--sans); font-size: 14px; line-height: 1.45; }
+      button, input { font: inherit; }
+      button { cursor: pointer; }
+      code { font-family: var(--mono); font-size: .86em; }
+
+      .shell { display: grid; grid-template-columns: 256px minmax(0, 1fr); min-height: 100vh; }
+      .sidebar { position: sticky; top: 0; height: 100vh; padding: 24px 16px; border-right: 1px solid var(--ink-150); background: rgba(255,255,255,.82); backdrop-filter: blur(18px); }
+      .brand { display: flex; align-items: center; gap: 10px; padding: 0 8px 30px; text-decoration: none; color: var(--ink-950); }
+      .brand-mark { display: grid; width: 32px; height: 32px; place-items: center; border-radius: 9px; background: var(--green-900); color: white; }
+      .brand-word { display: grid; line-height: 1.05; font-weight: 700; letter-spacing: -.035em; font-size: 17px; }
+      .brand-word span { color: var(--green-700); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
+      .side-label { display: block; margin: 0 8px 8px; color: var(--ink-650); font-size: 10px; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; }
+      .side-nav { display: grid; gap: 3px; margin-bottom: 24px; }
+      .side-nav a { display: flex; align-items: center; gap: 10px; padding: 9px 10px; color: var(--ink-800); border-radius: 8px; text-decoration: none; font-weight: 500; }
+      .side-nav a:hover, .side-nav a.active { background: var(--green-100); color: var(--green-900); }
+      .side-nav svg { width: 16px; height: 16px; stroke-width: 1.8; }
+      .side-note { position: absolute; inset: auto 16px 24px; padding: 13px; border: 1px solid var(--green-200); border-radius: var(--radius-sm); background: linear-gradient(145deg, #f7fff9, #e8f7ed); color: var(--green-900); }
+      .side-note strong { display: block; margin-bottom: 3px; font-size: 12px; }
+      .side-note p { margin: 0; font-size: 11px; line-height: 1.4; }
+
+      main { min-width: 0; }
+      .topbar { display: flex; position: sticky; z-index: 5; top: 0; align-items: center; justify-content: space-between; height: 70px; padding: 0 clamp(24px, 5vw, 72px); border-bottom: 1px solid rgba(182, 199, 193, .72); background: rgba(246,247,242,.84); backdrop-filter: blur(18px); }
+      .crumb { color: var(--ink-650); font-size: 12px; }
+      .crumb b { color: var(--ink-950); font-weight: 600; }
+      .top-actions { display: flex; align-items: center; gap: 9px; }
+      .version { padding: 5px 8px; border: 1px solid var(--ink-150); border-radius: var(--radius-pill); color: var(--ink-650); background: var(--surface); font-family: var(--mono); font-size: 10px; }
+
+      .content { max-width: 1320px; padding: 54px clamp(24px, 5vw, 72px) 100px; margin: 0 auto; }
+      .hero { display: grid; grid-template-columns: 1.25fr .75fr; gap: 36px; align-items: end; padding-bottom: 55px; border-bottom: 1px solid var(--ink-150); }
+      .eyebrow { display: flex; align-items: center; gap: 7px; margin: 0 0 14px; color: var(--green-700); font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; }
+      .eyebrow::before { width: 18px; height: 1px; background: currentColor; content: ""; }
+      h1, h2, h3, p { margin-top: 0; }
+      h1 { max-width: 750px; margin-bottom: 16px; font-family: var(--serif); font-size: clamp(42px, 5vw, 70px); font-weight: 600; letter-spacing: -.065em; line-height: .98; }
+      h1 em { color: var(--green-700); font-style: normal; }
+      .intro { max-width: 650px; margin: 0; color: var(--ink-650); font-size: 17px; line-height: 1.55; }
+      .hero-card { padding: 22px; border: 1px solid var(--green-200); border-radius: var(--radius-md); background: var(--green-900); color: white; box-shadow: var(--shadow-sm); }
+      .hero-card .eyebrow { color: var(--green-200); }
+      .hero-card h3 { margin-bottom: 10px; font-family: var(--serif); font-size: 25px; letter-spacing: -.04em; }
+      .hero-card p { margin-bottom: 19px; color: #d4ebe0; font-size: 13px; }
+      .principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+      .principle { padding: 10px 8px 0; border-top: 1px solid rgba(188, 233, 206, .45); }
+      .principle b { display: block; margin-bottom: 2px; color: var(--green-200); font-size: 11px; }
+      .principle span { color: #d4ebe0; font-size: 10px; line-height: 1.25; }
+
+      section { padding-top: 68px; scroll-margin-top: 70px; }
+      .section-head { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 26px; }
+      h2 { margin: 0; font-family: var(--serif); font-size: 34px; font-weight: 600; letter-spacing: -.05em; line-height: 1; }
+      .section-copy { max-width: 470px; margin: 0; color: var(--ink-650); font-size: 13px; }
+      .anchor { color: var(--green-700); font-family: var(--mono); font-size: 10px; text-decoration: none; }
+
+      .panel { border: 1px solid var(--ink-150); border-radius: var(--radius-md); background: var(--surface); box-shadow: var(--shadow-xs); }
+      .panel-title { display: flex; align-items: center; justify-content: space-between; padding: 17px 19px; border-bottom: 1px solid var(--ink-100); }
+      .panel-title h3 { margin: 0; font-size: 13px; letter-spacing: -.01em; }
+      .panel-title small { color: var(--ink-650); font-family: var(--mono); font-size: 10px; }
+      .panel-body { padding: 19px; }
+
+      .color-layout { display: grid; grid-template-columns: 1.15fr .85fr; gap: 18px; }
+      .color-grid { display: grid; grid-template-columns: repeat(6, 1fr); overflow: hidden; border-radius: 10px; }
+      .swatch { min-height: 116px; padding: 12px; display: flex; align-items: end; color: white; font-size: 10px; font-family: var(--mono); }
+      .swatch.light { color: var(--ink-800); }
+      .swatch span { opacity: .88; }
+      .semantic-list { display: grid; gap: 9px; }
+      .semantic-row { display: grid; grid-template-columns: 24px 120px 1fr; gap: 9px; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--ink-100); }
+      .semantic-row:last-child { border: 0; }
+      .semantic-dot { width: 18px; height: 18px; border-radius: 6px; }
+      .semantic-row b { font-size: 12px; }
+      .semantic-row span { color: var(--ink-650); font-size: 11px; }
+
+      .type-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 18px; }
+      .type-sample { padding: 30px 24px; border-radius: var(--radius-sm); background: var(--surface-soft); }
+      .type-sample .display { margin: 0 0 13px; font-family: var(--serif); font-size: clamp(35px, 4vw, 54px); font-weight: 600; letter-spacing: -.07em; line-height: .95; }
+      .type-sample .body-sample { max-width: 460px; margin: 0; color: var(--ink-650); font-size: 14px; }
+      .type-scale { display: grid; }
+      .type-row { display: flex; align-items: baseline; gap: 14px; padding: 9px 0; border-bottom: 1px solid var(--ink-100); }
+      .type-row:last-child { border: 0; }
+      .type-spec { flex: 0 0 86px; color: var(--ink-650); font-family: var(--mono); font-size: 10px; }
+      .type-render { letter-spacing: -.035em; }
+
+      .space-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; align-items: end; }
+      .space-cell { display: grid; gap: 7px; color: var(--ink-650); font-family: var(--mono); font-size: 10px; }
+      .space-bar { width: 100%; min-height: 8px; border-radius: 3px; background: var(--green-600); }
+      .space-cell span { white-space: nowrap; }
+
+      .components { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+      .component-panel.full { grid-column: 1 / -1; }
+      .button-row, .status-row, .tag-row, .avatar-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+      .btn { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 37px; padding: 0 13px; border: 1px solid transparent; border-radius: 8px; font-size: 12px; font-weight: 600; transition: .18s ease; }
+      .btn svg { width: 14px; height: 14px; }
+      .btn-primary { color: white; background: var(--green-900); box-shadow: 0 2px 3px rgba(20,77,58,.18); }
+      .btn-primary:hover { background: #0d3829; transform: translateY(-1px); }
+      .btn-secondary { color: var(--green-900); border-color: #9fcdb0; background: var(--green-100); }
+      .btn-quiet { color: var(--ink-800); border-color: var(--ink-150); background: var(--surface); }
+      .btn-danger { color: var(--coral-700); border-color: #f5bab3; background: #fff8f6; }
+      .icon-btn { width: 37px; padding: 0; }
+      .status { display: inline-flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: var(--radius-pill); font-size: 10px; font-weight: 700; }
+      .status::before { width: 6px; height: 6px; border-radius: 50%; background: currentColor; content: ""; }
+      .eligible { color: var(--green-700); background: var(--green-100); }
+      .review { color: var(--gold-700); background: var(--gold-100); }
+      .blocked { color: var(--coral-700); background: var(--coral-100); }
+      .verified { color: var(--teal-700); background: var(--teal-100); }
+      .retired { color: var(--violet-700); background: var(--violet-100); }
+      .tag { padding: 4px 7px; border: 1px solid var(--ink-150); border-radius: 5px; color: var(--ink-650); background: var(--surface); font-family: var(--mono); font-size: 10px; }
+      .field { display: grid; gap: 6px; }
+      .field label { color: var(--ink-800); font-size: 11px; font-weight: 600; }
+      .field label span { color: var(--coral-700); }
+      .field input { width: 100%; height: 38px; padding: 0 10px; border: 1px solid var(--ink-150); border-radius: 7px; outline: none; color: var(--ink-950); background: white; font-size: 12px; }
+      .field input:focus { border-color: var(--green-600); box-shadow: 0 0 0 3px rgba(40,145,102,.13); }
+      .helper { color: var(--ink-650); font-size: 10px; }
+      .input-demo { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+      .alert { display: flex; gap: 10px; padding: 11px; border: 1px solid #f5bab3; border-radius: 8px; background: #fff8f6; }
+      .alert svg { flex: 0 0 auto; width: 16px; color: var(--coral-700); }
+      .alert b { display: block; margin-bottom: 1px; color: var(--coral-700); font-size: 11px; }
+      .alert p { margin: 0; color: var(--ink-650); font-size: 11px; }
+      .avatar { display: grid; width: 28px; height: 28px; place-items: center; border-radius: 50%; color: var(--green-900); background: var(--green-200); font-size: 10px; font-weight: 700; }
+      .avatar.dark { color: white; background: var(--green-900); }
+      .avatar.gold { color: var(--gold-700); background: var(--gold-100); }
+
+      .pattern-layout { display: grid; grid-template-columns: 1.25fr .75fr; gap: 18px; }
+      .mini-app { overflow: hidden; border: 1px solid var(--ink-150); border-radius: var(--radius-md); background: white; box-shadow: var(--shadow-sm); }
+      .mini-app-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 17px; border-bottom: 1px solid var(--ink-100); }
+      .mini-app-head b { font-size: 12px; }
+      .mini-app-body { display: grid; grid-template-columns: 130px 1fr; min-height: 298px; }
+      .queue { padding: 10px; border-right: 1px solid var(--ink-100); background: #fbfcfa; }
+      .queue-label { padding: 4px 5px 8px; color: var(--ink-650); font-family: var(--mono); font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }
+      .queue-item { display: grid; gap: 4px; padding: 9px 7px; border-radius: 7px; }
+      .queue-item.active { background: var(--green-100); }
+      .queue-item b { font-size: 10px; }
+      .queue-item span { color: var(--ink-650); font-size: 9px; }
+      .review-card { padding: 20px; }
+      .review-card h3 { margin-bottom: 4px; font-size: 16px; letter-spacing: -.025em; }
+      .review-card > p { margin-bottom: 16px; color: var(--ink-650); font-size: 11px; }
+      .evidence-box { display: grid; gap: 10px; padding: 12px; border-radius: 8px; background: var(--surface-soft); }
+      .evidence-row { display: flex; justify-content: space-between; gap: 10px; color: var(--ink-650); font-size: 10px; }
+      .evidence-row b { color: var(--ink-800); font-weight: 600; }
+      .risk-card { display: grid; gap: 16px; padding: 21px; border-radius: var(--radius-md); background: var(--ink-950); color: white; }
+      .risk-top { display: flex; justify-content: space-between; align-items: start; }
+      .risk-top h3 { margin: 2px 0 0; font-family: var(--serif); font-size: 22px; letter-spacing: -.04em; }
+      .risk-score { width: 55px; height: 55px; display: grid; place-items: center; border: 5px solid var(--gold-700); border-top-color: var(--gold-100); border-radius: 50%; color: var(--gold-100); font-family: var(--mono); font-size: 11px; }
+      .risk-line { height: 7px; border-radius: 10px; background: #314840; overflow: hidden; }
+      .risk-line::before { display: block; width: 61%; height: 100%; border-radius: inherit; background: var(--gold-700); content: ""; }
+      .risk-list { display: grid; gap: 9px; padding: 0; margin: 0; list-style: none; }
+      .risk-list li { display: flex; gap: 7px; align-items: center; color: #c8d5d0; font-size: 11px; }
+      .risk-list li::before { width: 5px; height: 5px; border-radius: 50%; background: var(--gold-100); content: ""; }
+      .risk-card .btn { justify-self: start; }
+
+      .tokens { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+      .code-block { margin: 0; padding: 15px; overflow: auto; border-radius: 8px; background: var(--ink-950); color: #d9eee3; font-family: var(--mono); font-size: 10px; line-height: 1.75; }
+      .token-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+      .token-table th { padding: 0 0 8px; border-bottom: 1px solid var(--ink-150); color: var(--ink-650); font-size: 9px; font-weight: 700; letter-spacing: .08em; text-align: left; text-transform: uppercase; }
+      .token-table td { padding: 9px 0; border-bottom: 1px solid var(--ink-100); }
+      .token-table tr:last-child td { border: 0; }
+      .token-table code { color: var(--green-700); }
+      .token-table td:last-child { color: var(--ink-650); }
+      .footer { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-top: 70px; padding-top: 19px; border-top: 1px solid var(--ink-150); color: var(--ink-650); font-size: 11px; }
+      .footer a { color: var(--green-700); }
+
+      @media (max-width: 1040px) {
+        .shell { grid-template-columns: 1fr; }
+        .sidebar { display: none; }
+        .hero, .color-layout, .type-layout, .pattern-layout { grid-template-columns: 1fr; }
+      }
+      @media (max-width: 680px) {
+        .topbar { height: 56px; padding: 0 18px; }
+        .top-actions .version { display: none; }
+        .content { padding: 36px 18px 72px; }
+        .hero { gap: 28px; padding-bottom: 38px; }
+        h1 { font-size: 46px; }
+        .section-head { display: grid; align-items: start; }
+        .components, .tokens { grid-template-columns: 1fr; }
+        .component-panel.full { grid-column: auto; }
+        .input-demo { grid-template-columns: 1fr; }
+        .mini-app-body { grid-template-columns: 102px 1fr; }
+        .color-grid { grid-template-columns: repeat(3, 1fr); }
+        .swatch { min-height: 76px; }
+        .space-grid { grid-template-columns: repeat(4, 1fr); }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar">
+        <a class="brand" href="#top" aria-label="GreenLedger Design System home">
+          <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 18.5C9 14 8 8.5 19 4c0 11-4.5 15-11 15-1 0-2-.2-3-.5Z"/><path d="M5 18.5c2.8-3.5 5.6-5.7 9-7"/></svg></span>
+          <span class="brand-word">greenledger<span>design system</span></span>
+        </a>
+        <span class="side-label">Foundations</span>
+        <nav class="side-nav">
+          <a class="active" href="#principles"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3 4.5 7.3v9.4L12 21l7.5-4.3V7.3L12 3Z"/><path d="m4.5 7.3 7.5 4.4 7.5-4.4M12 21v-9.3"/></svg>Principles</a>
+          <a href="#color"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="8"/><circle cx="8.7" cy="9" r="1"/><circle cx="14.4" cy="7.5" r="1"/><circle cx="16" cy="13" r="1"/><path d="M7 15.7c1.5-1.4 3.1-1 4.1.1.7.8 1.2 1.8 2.6 1.2 1.4-.6 1.1-2.1 1.1-3.4"/></svg>Color</a>
+          <a href="#type"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 5h14M12 5v14M8 19h8"/></svg>Typography</a>
+          <a href="#space"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 7h16M4 17h16M8 4v16M16 4v16"/></svg>Spacing</a>
+        </nav>
+        <span class="side-label">Building blocks</span>
+        <nav class="side-nav">
+          <a href="#components"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg>Components</a>
+          <a href="#patterns"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M3.5 9h17M8.5 9v11"/></svg>Patterns</a>
+          <a href="#tokens"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/></svg>Tokens</a>
+        </nav>
+        <div class="side-note"><strong>Built for integrity</strong><p>Clear evidence, clear decisions, and visible states at every step.</p></div>
+      </aside>
+
+      <main id="top">
+        <header class="topbar">
+          <div class="crumb">GreenLedger / <b>Design system</b></div>
+          <div class="top-actions"><span class="version">v0.1 · JUL 2026</span><button class="btn btn-quiet" type="button" onclick="document.querySelector('#components').scrollIntoView()">View components</button></div>
+        </header>
+
+        <div class="content">
+          <section class="hero" id="principles">
+            <div>
+              <p class="eyebrow">Foundations for climate integrity</p>
+              <h1>Clarity for every <em>carbon claim.</em></h1>
+              <p class="intro">A trusted, calm interface language for GreenLedger—designed to help project teams, verifiers, and beneficiaries make high-consequence decisions with confidence.</p>
+            </div>
+            <aside class="hero-card">
+              <p class="eyebrow">Our north star</p>
+              <h3>Evidence should feel inspectable.</h3>
+              <p>Never hide a risk state behind a decorative interface. Make sources, ownership, and lifecycle status understandable at a glance.</p>
+              <div class="principles">
+                <div class="principle"><b>Precise</b><span>Information with provenance.</span></div>
+                <div class="principle"><b>Calm</b><span>Serious, never alarmist.</span></div>
+                <div class="principle"><b>Human</b><span>Decisions stay with people.</span></div>
+              </div>
+            </aside>
+          </section>
+
+          <section id="color">
+            <div class="section-head"><div><p class="eyebrow">01 · Color</p><h2>Signals with restraint</h2></div><p class="section-copy">A deep forest foundation reflects stewardship; semantic accents are reserved for system state and decision-critical information.</p></div>
+            <div class="color-layout">
+              <article class="panel">
+                <div class="panel-title"><h3>Core palette</h3><small>Use in this order: ink → green → semantic</small></div>
+                <div class="panel-body"><div class="color-grid">
+                  <div class="swatch" style="background:#10211d"><span>Ink<br>#10211D</span></div>
+                  <div class="swatch" style="background:#144d3a"><span>Forest<br>#144D3A</span></div>
+                  <div class="swatch" style="background:#289166"><span>Leaf<br>#289166</span></div>
+                  <div class="swatch light" style="background:#bce9ce"><span>Mint<br>#BCE9CE</span></div>
+                  <div class="swatch light" style="background:#e0f6e7"><span>Sprout<br>#E0F6E7</span></div>
+                  <div class="swatch light" style="background:#f6f7f2"><span>Canvas<br>#F6F7F2</span></div>
+                </div></div>
+              </article>
+              <article class="panel">
+                <div class="panel-title"><h3>Semantic states</h3><small>Never rely on color alone</small></div>
+                <div class="panel-body semantic-list">
+                  <div class="semantic-row"><i class="semantic-dot" style="background:var(--green-600)"></i><b>Eligible</b><span>Clear to proceed</span></div>
+                  <div class="semantic-row"><i class="semantic-dot" style="background:var(--gold-700)"></i><b>Needs review</b><span>Human decision required</span></div>
+                  <div class="semantic-row"><i class="semantic-dot" style="background:var(--coral-700)"></i><b>Blocked</b><span>Conflict or duplicate found</span></div>
+                  <div class="semantic-row"><i class="semantic-dot" style="background:var(--teal-700)"></i><b>Verified</b><span>Recorded by verifier</span></div>
+                  <div class="semantic-row"><i class="semantic-dot" style="background:var(--violet-700)"></i><b>Retired</b><span>Lifecycle complete</span></div>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section id="type">
+            <div class="section-head"><div><p class="eyebrow">02 · Type</p><h2>Confident, not cold</h2></div><a class="anchor" href="#type"># typography</a></div>
+            <div class="type-layout">
+              <div class="type-sample"><p class="display">Proof in every detail.</p><p class="body-sample">Fraunces brings a considered editorial tone to big ideas. DM Sans keeps working data simple, legible, and grounded.</p></div>
+              <article class="panel"><div class="panel-body type-scale">
+                <div class="type-row"><span class="type-spec">display / 56</span><span class="type-render" style="font-family:var(--serif);font-size:28px;font-weight:600">Carbon claim integrity</span></div>
+                <div class="type-row"><span class="type-spec">heading / 32</span><span class="type-render" style="font-size:23px;font-weight:600">Verification queue</span></div>
+                <div class="type-row"><span class="type-spec">title / 18</span><span class="type-render" style="font-size:16px;font-weight:600">Evidence summary</span></div>
+                <div class="type-row"><span class="type-spec">body / 14</span><span class="type-render" style="font-size:14px">Detailed, readable context for a decision.</span></div>
+                <div class="type-row"><span class="type-spec">meta / 11</span><span class="type-render" style="font-family:var(--mono);font-size:11px;letter-spacing:.03em;color:var(--ink-650)">VCS-3419 · PAGE 08 · 21 JUL 2026</span></div>
+              </div></article>
+            </div>
+          </section>
+
+          <section id="space">
+            <div class="section-head"><div><p class="eyebrow">03 · Space & form</p><h2>Deliberate rhythm</h2></div><p class="section-copy">Base all spacing on a four-pixel rhythm. Use soft rectangles to group related evidence without making every surface feel boxed in.</p></div>
+            <article class="panel"><div class="panel-body"><div class="space-grid">
+              <div class="space-cell"><i class="space-bar" style="height:4px"></i><span>4 · 1x</span></div><div class="space-cell"><i class="space-bar" style="height:8px"></i><span>8 · 2x</span></div><div class="space-cell"><i class="space-bar" style="height:12px"></i><span>12 · 3x</span></div><div class="space-cell"><i class="space-bar" style="height:16px"></i><span>16 · 4x</span></div><div class="space-cell"><i class="space-bar" style="height:24px"></i><span>24 · 6x</span></div><div class="space-cell"><i class="space-bar" style="height:32px"></i><span>32 · 8x</span></div><div class="space-cell"><i class="space-bar" style="height:40px"></i><span>40 · 10x</span></div><div class="space-cell"><i class="space-bar" style="height:48px"></i><span>48 · 12x</span></div>
+            </div></div></article>
+          </section>
+
+          <section id="components">
+            <div class="section-head"><div><p class="eyebrow">04 · Components</p><h2>Small parts, reliable outcomes</h2></div><a class="anchor" href="#components"># UI inventory</a></div>
+            <div class="components">
+              <article class="panel component-panel"><div class="panel-title"><h3>Buttons</h3><small>clear action hierarchy</small></div><div class="panel-body button-row">
+                <button class="btn btn-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 4 4L19 6"/></svg>Verify claim</button><button class="btn btn-secondary">Review evidence</button><button class="btn btn-quiet">Save draft</button><button class="btn btn-danger">Reject</button><button class="btn btn-quiet icon-btn" aria-label="More actions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg></button>
+              </div></article>
+              <article class="panel component-panel"><div class="panel-title"><h3>Lifecycle status</h3><small>label + signal</small></div><div class="panel-body status-row"><span class="status eligible">Eligible</span><span class="status review">Needs review</span><span class="status blocked">Blocked</span><span class="status verified">Verified</span><span class="status retired">Retired</span></div></article>
+              <article class="panel component-panel"><div class="panel-title"><h3>Evidence fields</h3><small>simple & source-first</small></div><div class="panel-body input-demo"><div class="field"><label>Project ID <span>*</span></label><input value="VCS-3419" aria-label="Project ID"><span class="helper">Registry-issued identifier</span></div><div class="field"><label>Report URL <span>*</span></label><input value="project-report.pdf" aria-label="Report URL"><span class="helper">Public source only</span></div></div></article>
+              <article class="panel component-panel"><div class="panel-title"><h3>Tags, people & alerts</h3><small>context, not decoration</small></div><div class="panel-body" style="display:grid;gap:16px"><div class="tag-row"><span class="tag">VM0048</span><span class="tag">2022 VINTAGE</span><span class="tag">BRAZIL</span></div><div class="avatar-row"><span class="avatar dark">AC</span><span class="avatar">NS</span><span class="avatar gold">+2</span><span style="color:var(--ink-650);font-size:11px">Verifier team</span></div><div class="alert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4m0 4h.01M10.3 4.3 3.6 16a2 2 0 0 0 1.7 3h13.4a2 2 0 0 0 1.7-3L13.7 4.3a2 2 0 0 0-3.4 0Z"/></svg><div><b>Serial range conflict</b><p>Cross-registry match found. Verification is blocked.</p></div></div></div></article>
+            </div>
+          </section>
+
+          <section id="patterns">
+            <div class="section-head"><div><p class="eyebrow">05 · Product pattern</p><h2>Risk review, made legible</h2></div><p class="section-copy">The primary interaction brings the case, its supporting evidence, and the decision signal into one focused workspace.</p></div>
+            <div class="pattern-layout">
+              <div class="mini-app">
+                <div class="mini-app-head"><b>Verifier queue</b><span class="status review">3 pending</span></div>
+                <div class="mini-app-body"><aside class="queue"><div class="queue-label">Today</div><div class="queue-item active"><b>Amazon Reforestation</b><span>VCS-3419 · review</span></div><div class="queue-item"><b>Solar Karnataka</b><span>GS-982 · eligible</span></div><div class="queue-item"><b>Forest Guard</b><span>VCS-2024 · blocked</span></div></aside><div class="review-card"><span class="status review">Needs review</span><h3>Amazon Reforestation</h3><p>VCS-3419 · Acre, Brazil · 2022 vintage</p><div class="evidence-box"><div class="evidence-row"><span>Serial range</span><b>VCS-100-2022-010–250</b></div><div class="evidence-row"><span>Methodology</span><b>VM0048</b></div><div class="evidence-row"><span>Report source</span><b>Page 08 ↗</b></div></div><div class="button-row" style="margin-top:16px"><button class="btn btn-primary">Open review</button><button class="btn btn-quiet">View source</button></div></div></div>
+              </div>
+              <aside class="risk-card"><div class="risk-top"><div><p class="eyebrow" style="margin-bottom:7px;color:var(--green-200)">Match result</p><h3>Review required</h3></div><div class="risk-score">61</div></div><div class="risk-line"></div><ul class="risk-list"><li>Same project name found</li><li>Country and vintage align</li><li>Serial range is not exact</li></ul><button class="btn btn-secondary">Read match explanation</button></aside>
+            </div>
+          </section>
+
+          <section id="tokens">
+            <div class="section-head"><div><p class="eyebrow">06 · Handoff</p><h2>Tokens ready to use</h2></div><p class="section-copy">Keep interface choices linked to semantic decisions. These names are intended to map cleanly to Tailwind variables or a design-token file.</p></div>
+            <div class="tokens">
+              <article class="panel"><div class="panel-title"><h3>Core CSS variables</h3><small>foundation</small></div><div class="panel-body"><pre class="code-block">:root {
+  --gl-ink: #10211d;
+  --gl-canvas: #f6f7f2;
+  --gl-surface: #ffffff;
+  --gl-primary: #144d3a;
+  --gl-primary-hover: #0d3829;
+  --gl-success: #289166;
+  --gl-warning: #9d5c08;
+  --gl-danger: #ae3b35;
+  --gl-radius-card: 16px;
+  --gl-shadow-card: 0 5px 14px
+    rgba(16, 33, 29, .07);
+}</pre></div></article>
+              <article class="panel"><div class="panel-title"><h3>Usage rules</h3><small>design guardrails</small></div><div class="panel-body"><table class="token-table"><thead><tr><th>Token</th><th>Use it for</th></tr></thead><tbody><tr><td><code>gl-primary</code></td><td>One primary action per view</td></tr><tr><td><code>gl-warning</code></td><td>Human review, not failure</td></tr><tr><td><code>gl-danger</code></td><td>Blocks and destructive actions</td></tr><tr><td><code>gl-mono</code></td><td>IDs, hashes, dates, evidence refs</td></tr><tr><td><code>gl-radius-card</code></td><td>Content groups and review surfaces</td></tr></tbody></table></div></article>
+            </div>
+          </section>
+
+          <footer class="footer"><span>GreenLedger Design System · v0.1</span><span>Prototype UI for verified claim integrity.</span><a href="#top">Back to top ↑</a></footer>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
